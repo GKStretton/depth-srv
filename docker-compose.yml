@@ -1,0 +1,33 @@
+version: "3.7"
+
+volumes:
+  grafana-storage:
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    command: mosquitto -c /mosquittoconf/mosquitto.conf
+    ports:
+      - 1883:1883
+    volumes:
+      - ./config/mosquitto:/mosquittoconf
+    restart: unless-stopped
+  grafana:
+    image: grafana/grafana-oss
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    ports:
+      - 3005:3000
+    restart: unless-stopped
+    environment:
+      GF_PANELS_DISABLE_SANITIZE_HTML: "true"
+  homeassistant:
+    image: homeassistant/homeassistant:latest
+    network_mode: host
+    volumes:
+      - ${HOME_DIR}/home-assistant:/config
+    restart: unless-stopped
+    environment:
+       TZ: "Europe/London"
+    depends_on:
+      - mosquitto
