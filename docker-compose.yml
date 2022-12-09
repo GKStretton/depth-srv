@@ -22,7 +22,7 @@ services:
     environment:
       GF_PANELS_DISABLE_SANITIZE_HTML: "true"
   homeassistant:
-    image: homeassistant/homeassistant:latest
+    image: homeassistant/home-assistant:latest
     network_mode: host
     volumes:
       - ${HOME_DIR}/home-assistant:/config
