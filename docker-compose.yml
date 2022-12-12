@@ -38,6 +38,6 @@ services:
     ports:
       - 3006:80
     devices:
-      - /dev/ttyS0:/dev/ttyACM0
+      - ${PRINTER_DEVICE}:/dev/ttyACM0
     volumes:
       - octoprint:/octoprint
