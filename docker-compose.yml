@@ -3,6 +3,7 @@ version: "3.7"
 volumes:
   grafana-storage:
   octoprint:
+  node-red-data:
 
 services:
   mosquitto:
@@ -29,7 +30,7 @@ services:
       - ${HOME_DIR}/home-assistant:/config
     restart: unless-stopped
     environment:
-       TZ: "Europe/London"
+      TZ: "Europe/London"
     depends_on:
       - mosquitto
   octoprint:
@@ -41,3 +42,12 @@ services:
       - ${PRINTER_DEVICE}:/dev/ttyACM0
     volumes:
       - octoprint:/octoprint
+  node-red:
+    image: nodered/node-red:latest
+    environment:
+      TZ: "Europe/London"
+    ports:
+      - 1880:1880
+    network_mode: host
+    volumes:
+      - node-red-data:/data
