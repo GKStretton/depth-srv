@@ -51,3 +51,4 @@ services:
     network_mode: host
     volumes:
       - node-red-data:/data
+      - /home/greg:/home/greg
