@@ -1,2 +1,2 @@
 #!/bin/bash
-ssh greg@DEPTH -t "~/update-depth-srv"
+ssh greg@DEPTH -t "~/depth-srv/update-local"
