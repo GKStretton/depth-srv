@@ -1,6 +1,7 @@
 #!/bin/bash
 printerTopic=cmnd/tasmota_sw_ender3pro/Power1
 # octoprint only starts if printer serial device exists, as it gets mounted.
+# asumming broker is already running...
 echo "sending ON to printer"
 mosquitto_pub -h depth -t "$printerTopic" -m "ON"
 sleep 1
@@ -10,4 +11,4 @@ sudo docker-compose down
 sudo docker-compose up --build -d --remove-orphans
 
 # switch takes time to reconnect
-{ s=20; echo "sending OFF to printer in $s seconds"; sleep $s; mosquitto_pub -h depth -t "$printerTopic" -m "OFF"; } &
+{ s=30; echo "sending OFF to printer in $s seconds"; sleep $s; mosquitto_pub -h depth -t "$printerTopic" -m "OFF"; } &
