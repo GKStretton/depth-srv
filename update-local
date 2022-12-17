@@ -10,4 +10,4 @@ sudo docker-compose down
 sudo docker-compose up --build -d --remove-orphans
 
 # switch takes time to reconnect
-{ s=15; echo "sending OFF to printer in $s seconds"; sleep $s; mosquitto_pub -h depth -t "$printerTopic" -m "OFF"; } &
+{ s=20; echo "sending OFF to printer in $s seconds"; sleep $s; mosquitto_pub -h depth -t "$printerTopic" -m "OFF"; } &
