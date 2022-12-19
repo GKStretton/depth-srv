@@ -39,8 +39,8 @@ services:
       - 3006:80
     privileged: true
     environment:
-      ENABLE_MJPG_STREAMER: true
-      CAMERA_DEV: /dev/video4
+      ENABLE_MJPG_STREAMER: "true"
+      CAMERA_DEV: "/dev/video4"
     volumes:
       - octoprint:/octoprint
       - /dev:/dev
