@@ -40,7 +40,7 @@ services:
     privileged: true
     environment:
       ENABLE_MJPG_STREAMER: "true"
-      CAMERA_DEV: "/dev/video4"
+      CAMERA_DEV: "/dev/video0"
     volumes:
       - octoprint:/octoprint
       - /dev:/dev
