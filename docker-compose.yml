@@ -49,11 +49,15 @@ services:
     container_name: rhasspy
     restart: unless-stopped
     volumes:
-        - "${HOME_DIR}/.config/rhasspy/profiles:/profiles"
-        - "/etc/localtime:/etc/localtime:ro"
+      - "${HOME_DIR}/.config/rhasspy/profiles:/profiles"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "${HOME_DIR}/.config/pulse/cookie:/root/.config/pulse/cookie"
+      - "${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native"
+    environment:
+      PULSE_SERVER: "unix:${XDG_RUNTIME_DIR}/pulse/native"
     ports:
-        - "12101:12101"
-        - "12183:12183" # internal mqtt broker
+      - "12101:12101"
+      - "12183:12183" # internal mqtt broker
     devices:
-        - "/dev/snd:/dev/snd"
+      - "/dev/snd:/dev/snd"
     command: --user-profiles /profiles --profile en
