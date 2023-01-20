@@ -61,3 +61,14 @@ services:
     devices:
       - "/dev/snd:/dev/snd"
     command: --user-profiles /profiles --profile en
+  larynx:
+    image: "rhasspy/larynx"
+    tty: true
+    ports:
+      - "5002:5002"
+    environment:
+      HOME: "${HOME_DIR}"
+    volumes:
+      - "$HOME:${HOME_DIR}"
+      - "/usr/share/ca-certificates:/usr/share/ca-certificates"
+      - "/etc/ssl/certs:/etc/ssl/certs"
