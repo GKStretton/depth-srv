@@ -69,6 +69,6 @@ services:
     environment:
       HOME: "${HOME_DIR}"
     volumes:
-      - "$HOME:${HOME_DIR}"
+      - "${HOME_DIR}:${HOME_DIR}"
       - "/usr/share/ca-certificates:/usr/share/ca-certificates"
       - "/etc/ssl/certs:/etc/ssl/certs"
