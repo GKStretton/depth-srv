@@ -22,6 +22,7 @@ services:
     restart: unless-stopped
     environment:
       GF_PANELS_DISABLE_SANITIZE_HTML: "true"
+      GF_SECURITY_ALLOW_EMBEDDING: "true"
   homeassistant:
     image: homeassistant/home-assistant:latest
     network_mode: host
