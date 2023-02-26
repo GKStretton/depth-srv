@@ -64,6 +64,7 @@ services:
     command: --user-profiles /profiles --profile en
   larynx:
     image: "rhasspy/larynx"
+    restart: unless-stopped
     tty: true
     ports:
       - "5002:5002"
@@ -73,3 +74,14 @@ services:
       - "${HOME_DIR}:${HOME_DIR}"
       - "/usr/share/ca-certificates:/usr/share/ca-certificates"
       - "/etc/ssl/certs:/etc/ssl/certs"
+  minecraftserver:
+    image: "itzg/minecraft-bedrock-server"
+    ports:
+      - "19132:19132/udp"
+    environment:
+      EULA: "TRUE"
+      GAMEMODE: survival
+      DIFFICULTY: easy
+    volumes:
+      - ${HOME_DIR}/minecraft-server:/data
+    user: "1000:1000"
