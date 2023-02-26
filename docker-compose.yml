@@ -76,6 +76,7 @@ services:
       - "/etc/ssl/certs:/etc/ssl/certs"
   minecraftserver:
     image: "itzg/minecraft-bedrock-server"
+    restart: unless-stopped
     ports:
       - "19132:19132/udp"
     environment:
@@ -84,4 +85,3 @@ services:
       DIFFICULTY: easy
     volumes:
       - ${HOME_DIR}/minecraft-server:/data
-    user: "1000:1000"
