@@ -6,13 +6,17 @@ volumes:
 
 services:
   mosquitto:
-    image: eclipse-mosquitto:latest
-    command: mosquitto -c /mosquittoconf/mosquitto.conf
+    build: ./mosquitto
     ports:
       - 1883:1883
       - 9001:9001
     volumes:
-      - ./config/mosquitto:/mosquittoconf
+      - ./mosquitto:/mosquittoconf
+    environment:
+      CLOUD_BROKER_HOST: ${CLOUD_BROKER_HOST}
+      CLOUD_BROKER_PORT: ${CLOUD_BROKER_PORT}
+      CLOUD_BROKER_USERNAME: ${CLOUD_BROKER_USERNAME}
+      CLOUD_BROKER_PASSWORD: ${CLOUD_BROKER_PASSWORD}
     restart: unless-stopped
   grafana:
     image: grafana/grafana-oss
@@ -75,17 +79,3 @@ services:
       - "${HOME_DIR}:${HOME_DIR}"
       - "/usr/share/ca-certificates:/usr/share/ca-certificates"
       - "/etc/ssl/certs:/etc/ssl/certs"
-  minecraftserver:
-    image: "itzg/minecraft-bedrock-server"
-    restart: unless-stopped
-    ports:
-      - "19132:19132/udp"
-    environment:
-      EULA: "TRUE"
-      VERSION: "1.19.62.01"
-      GAMEMODE: survival
-      DIFFICULTY: easy
-      ALLOW_CHEATS: "true"
-      LEVEL_SEED: 7644964991330705060
-    volumes:
-      - ${HOME_DIR}/minecraft-server:/data
