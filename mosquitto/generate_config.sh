@@ -7,6 +7,8 @@ listener 1883
 listener 9001
 protocol websockets
 
+log_type payload
+
 # Bridge configuration for broker B
 connection bridge-to-cloud
 address ${CLOUD_BROKER_HOST}:${CLOUD_BROKER_PORT}
